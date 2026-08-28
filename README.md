@@ -10,7 +10,7 @@ pages; only the two legal pages are separate documents.
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | The whole site: hero, why-us, `#services`, how it works, `#pricing`, `#about`, `#reviews`, `#faq`, `#contact` |
+| `index.html` | The whole site: hero, `#services` (positioning + the five trip types), how it works, `#pricing`, `#about`, `#reviews`, `#faq`, `#contact` |
 | `privacy.html` | Privacy Policy |
 | `terms.html` | Terms of Use |
 | `404.html` | Not-found page |
@@ -55,6 +55,8 @@ you later want emailed leads as well, that is the piece to add.
   text. Search all files for `753-5659` and `12057535659` if it ever changes.
 * **Pricing.** `$0.50 per mile` and the over-eight-hours fee appear in the hero, the
   `#pricing` and `#faq` sections, `terms.html`, and the `Service` structured data.
+* **Service types.** The cards in `#services` are mirrored by `hasOfferCatalog` in the
+  `Service` structured data. Add or remove a card and update that list to match.
 * **FAQ.** The questions in `#faq` are mirrored in the `FAQPage` structured data in the
   `<head>`. Edit both, or the schema stops matching the page.
 * **Legal pages.** `privacy.html` and `terms.html` are dated January 2025. Update the
