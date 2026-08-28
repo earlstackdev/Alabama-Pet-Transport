@@ -139,12 +139,12 @@ p { text-wrap: pretty; }
   padding-inline: var(--gut);
 }
 .shell--narrow { max-width: 760px; }
-.section { padding-block: clamp(3.5rem, 9vw, 6.5rem); }
+.section { padding-block: clamp(2.75rem, 6vw, 4.75rem); }
 .section--tight { padding-block: clamp(2.75rem, 6vw, 4.5rem); }
 .section--sand { background: var(--sand); }
 .section--line { border-top: 1px solid var(--gray-200); }
 
-.section-head { max-width: 46rem; margin-bottom: clamp(2rem, 5vw, 3.25rem); }
+.section-head { max-width: 46rem; margin-bottom: clamp(1.75rem, 4vw, 2.5rem); }
 .section-head--center { margin-inline: auto; text-align: center; }
 .section-head p { margin-top: .9rem; }
 
@@ -394,7 +394,7 @@ p { text-wrap: pretty; }
 .hero-inner {
   display: grid;
   gap: clamp(2.25rem, 6vw, 3.5rem);
-  padding-block: clamp(2.75rem, 8vw, 5.25rem);
+  padding-block: clamp(2.5rem, 6vw, 4rem);
 }
 @media (min-width: 940px) {
   .hero-inner {
@@ -457,7 +457,7 @@ p { text-wrap: pretty; }
   object-fit: cover;
   object-position: 50% 45%;
 }
-@media (min-width: 940px) { .hero-media img { aspect-ratio: 5 / 6; } }
+@media (min-width: 940px) { .hero-media img { aspect-ratio: 1 / 1; } }
 .hero-media figcaption {
   position: absolute;
   left: 1rem; right: 1rem; bottom: 1rem;
@@ -591,6 +591,8 @@ p { text-wrap: pretty; }
 
 /* ---------- Split feature ---------- */
 .split { display: grid; gap: clamp(2rem, 5vw, 3.5rem); align-items: center; }
+/* When a column carries a stacked photo + facts, top-align instead. */
+.split--top { align-items: start; }
 @media (min-width: 900px) { .split { grid-template-columns: 1fr 1fr; } }
 .split--flip .split-media { order: -1; }
 @media (max-width: 899px) { .split--flip .split-media { order: 0; } }
