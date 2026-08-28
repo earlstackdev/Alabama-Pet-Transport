@@ -1,0 +1,6 @@
+# robots.txt — Alabama Pet Transport Services
+User-agent: *
+Allow: /
+Disallow: /404.html
+
+Sitemap: https://alabamapettransport.com/sitemap.xml

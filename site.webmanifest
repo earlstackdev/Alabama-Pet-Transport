@@ -1,0 +1,13 @@
+{
+  "name": "Alabama Pet Transport Services",
+  "short_name": "AL Pet Transport",
+  "description": "USDA-certified, family-owned door-to-door pet transport from Alabama to all 50 states.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#9E1B32",
+  "icons": [
+    { "src": "/assets/img/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
