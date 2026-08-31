@@ -167,6 +167,33 @@
     return lines.join("\n");
   };
 
+  // Encode form fields for Netlify's forms endpoint (application/x-www-form-urlencoded).
+  var encodeFormData = function (data) {
+    return Object.keys(data)
+      .map(function (key) {
+        return encodeURIComponent(key) + "=" + encodeURIComponent(data[key]);
+      })
+      .join("&");
+  };
+
+  // Submit a copy of the lead to Netlify Forms so it is captured even if the
+  // visitor's device does not open the SMS link (e.g. desktop browsers).
+  var submitToNetlify = function () {
+    var data = { "form-name": "quote-form" };
+    ["name", "phone", "pickup", "dropoff", "pet", "timing", "details"].forEach(function (key) {
+      var el = form.elements[key];
+      if (el) data[key] = el.value || "";
+    });
+    var honeypot = form.elements["bot-field"];
+    data["bot-field"] = honeypot ? honeypot.value || "" : "";
+
+    return fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encodeFormData(data)
+    });
+  };
+
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -184,6 +211,8 @@
         "Opening your messaging app with the details filled in — press send to reach Kristi and Rod.";
     }
     if (fallback) fallback.hidden = false;
+
+    submitToNetlify().catch(function () { /* SMS is the primary path; ignore network errors */ });
 
     window.location.href =
       "sms:" + BUSINESS_SMS + "?&body=" + encodeURIComponent(body);

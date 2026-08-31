@@ -772,7 +772,11 @@
           Nothing is sent until you press send. Fields marked <span class="req">*</span> are required.
         </p>
 
-        <form id="quote-form" novalidate>
+        <form id="quote-form" novalidate name="quote-form" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="quote-form">
+          <p class="hidden" hidden style="position:absolute;left:-9999px">
+            <label>Don&rsquo;t fill this out if you&rsquo;re human: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+          </p>
           <div class="field-row">
             <div class="field">
               <label for="f-name">Your name <span class="req" aria-hidden="true">*</span></label>
