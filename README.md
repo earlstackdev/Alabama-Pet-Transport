@@ -36,13 +36,17 @@ cPanel). Point `alabamapettransport.com` at it and serve over HTTPS.
 
 ## How the quote form works
 
-Leads are delivered by **text**, so the form does not post to a server. It gathers the
-details, opens the visitor's own messaging app with the message pre-written to
-(205) 753-5659, and the visitor presses send. If the messaging app does not open, the
-message is shown on the page with a copy button.
+The `#contact` quote form is a standard **Netlify Form**. It posts directly to Netlify
+(`data-netlify="true"`, `name="quote-form"`, plus the matching hidden `form-name`
+input) — no JavaScript, backend, or third-party form service is involved. A hidden
+`bot-field` honeypot input provides basic spam filtering.
 
-This means there is no backend to maintain and no database holding customer data. If
-you later want emailed leads as well, that is the piece to add.
+Submissions land in the site's Netlify dashboard under **Forms**. To get emailed when a
+lead comes in, go to **Site settings → Forms → Form notifications** in Netlify and add
+an email (or Slack/webhook) notification for the `quote-form` form.
+
+Because this is a plain static site (no build step), Netlify detects the form directly
+from `index.html` at deploy time — nothing else to configure.
 
 ## Things to keep current
 

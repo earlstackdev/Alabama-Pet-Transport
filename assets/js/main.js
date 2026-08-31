@@ -4,8 +4,6 @@
 (function () {
   "use strict";
 
-  var BUSINESS_SMS = "+12057535659";
-
   /* ---------------------------------------------------------------- nav */
   var header = document.querySelector(".site-header");
   var toggle = document.querySelector(".nav-toggle");
@@ -133,107 +131,4 @@
     el.textContent = String(new Date().getFullYear());
   });
 
-  /* --------------------------------------------------------------- form
-     Leads are delivered by text message, so the quote form composes a
-     ready-to-send SMS rather than posting to a server. If the device
-     cannot open an SMS link, the summary is shown so it can be copied. */
-  var form = document.getElementById("quote-form");
-  if (!form) return;
-
-  var status = document.getElementById("form-status");
-  var fallback = document.getElementById("form-fallback");
-  var fallbackText = document.getElementById("form-fallback-text");
-  var copyBtn = document.getElementById("form-copy");
-
-  // Each field carries a short data-sms-label used in the composed message,
-  // falling back to its visible label with any hint text stripped out.
-  var label = function (el) {
-    if (el.getAttribute("data-sms-label")) return el.getAttribute("data-sms-label");
-    var lbl = form.querySelector('label[for="' + el.id + '"]');
-    if (!lbl) return el.name;
-    var copy = lbl.cloneNode(true);
-    copy.querySelectorAll(".hint, .req").forEach(function (n) { n.remove(); });
-    return copy.textContent.replace(/\s+/g, " ").replace(/[:*]+$/, "").trim();
-  };
-
-  var compose = function () {
-    var lines = ["Pet transport quote request", ""];
-    ["name", "phone", "pickup", "dropoff", "pet", "timing", "details"].forEach(function (key) {
-      var el = form.elements[key];
-      if (!el) return;
-      var value = String(el.value || "").trim();
-      if (value) lines.push(label(el) + ": " + value);
-    });
-    return lines.join("\n");
-  };
-
-  // Encode form fields for Netlify's forms endpoint (application/x-www-form-urlencoded).
-  var encodeFormData = function (data) {
-    return Object.keys(data)
-      .map(function (key) {
-        return encodeURIComponent(key) + "=" + encodeURIComponent(data[key]);
-      })
-      .join("&");
-  };
-
-  // Submit a copy of the lead to Netlify Forms so it is captured even if the
-  // visitor's device does not open the SMS link (e.g. desktop browsers).
-  var submitToNetlify = function () {
-    var data = { "form-name": "quote-form" };
-    ["name", "phone", "pickup", "dropoff", "pet", "timing", "details"].forEach(function (key) {
-      var el = form.elements[key];
-      if (el) data[key] = el.value || "";
-    });
-    var honeypot = form.elements["bot-field"];
-    data["bot-field"] = honeypot ? honeypot.value || "" : "";
-
-    return fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encodeFormData(data)
-    });
-  };
-
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-
-    var body = compose();
-    if (fallbackText) fallbackText.value = body;
-
-    if (status) {
-      status.hidden = false;
-      status.textContent =
-        "Opening your messaging app with the details filled in — press send to reach Kristi and Rod.";
-    }
-    if (fallback) fallback.hidden = false;
-
-    submitToNetlify().catch(function () { /* SMS is the primary path; ignore network errors */ });
-
-    window.location.href =
-      "sms:" + BUSINESS_SMS + "?&body=" + encodeURIComponent(body);
-  });
-
-  if (copyBtn && fallbackText) {
-    copyBtn.addEventListener("click", function () {
-      var done = function () {
-        var original = copyBtn.getAttribute("data-label") || copyBtn.textContent;
-        copyBtn.setAttribute("data-label", original);
-        copyBtn.textContent = "Copied";
-        window.setTimeout(function () { copyBtn.textContent = original; }, 2200);
-      };
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(fallbackText.value).then(done, function () {
-          fallbackText.select();
-        });
-      } else {
-        fallbackText.select();
-        try { document.execCommand("copy"); done(); } catch (err) { /* no-op */ }
-      }
-    });
-  }
 })();
