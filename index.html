@@ -30,10 +30,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap"></noscript>
-<script>document.documentElement.classList.add("js");</script>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"></noscript>
 <link rel="stylesheet" href="assets/css/styles.css">
 
 <script type="application/ld+json">
@@ -451,7 +450,7 @@
 
     <div class="note mt-3">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>
-      <p style="margin:0">
+      <p>
         <strong>Every trip is quoted individually.</strong> The figures above show how the
         number is built from the mileage rate. Your written quote is the binding one, and it
         comes to you before anything is booked.
@@ -624,7 +623,7 @@
 
     <div class="note mt-3">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>
-      <p style="margin:0">
+      <p>
         <strong>Travelled with us?</strong> A short review helps the next family decide who to
         trust with their animal &mdash; and we read every one. Text us at
         <a href="sms:+12057535659">(205) 753-5659</a> and we will send you the link.
@@ -645,8 +644,8 @@
       </p>
     </div>
 
-    <h3 style="font-size:1rem;text-transform:uppercase;letter-spacing:.12em;font-family:var(--font-sans);color:var(--crimson);margin-bottom:.75rem">Service &amp; coverage</h3>
-    <div class="faq" style="margin-bottom:2.5rem">
+    <h3 class="faq-group-title">Service &amp; coverage</h3>
+    <div class="faq faq-group">
       <details>
         <summary>Where do you transport pets?</summary>
         <div class="faq-body"><p>Anywhere in the United States. We are based in Alabama and drive to all 50 states. There is no mileage radius &mdash; if the pickup and drop-off can be reached by road, we can quote the trip.</p></div>
@@ -665,8 +664,8 @@
       </details>
     </div>
 
-    <h3 style="font-size:1rem;text-transform:uppercase;letter-spacing:.12em;font-family:var(--font-sans);color:var(--crimson);margin-bottom:.75rem">Booking &amp; pricing</h3>
-    <div class="faq" style="margin-bottom:2.5rem">
+    <h3 class="faq-group-title">Booking &amp; pricing</h3>
+    <div class="faq faq-group">
       <details>
         <summary>How much does pet transport cost?</summary>
         <div class="faq-body"><p>Transport is charged at $0.50 per mile. Longer trips that run more than eight hours carry an additional fee on top of the mileage, which we state clearly when we quote you. There is nothing else added afterwards.</p></div>
@@ -681,7 +680,7 @@
       </details>
     </div>
 
-    <h3 style="font-size:1rem;text-transform:uppercase;letter-spacing:.12em;font-family:var(--font-sans);color:var(--crimson);margin-bottom:.75rem">During the trip &amp; getting hold of us</h3>
+    <h3 class="faq-group-title">During the trip &amp; getting hold of us</h3>
     <div class="faq">
       <details>
         <summary>Will I get updates while my pet is travelling?</summary>
@@ -709,7 +708,7 @@
 
 <section class="section section--sand" id="contact" aria-labelledby="ways-h">
   <div class="shell">
-    <div class="split" style="align-items:start">
+    <div class="split split--top">
       <div>
         <span class="eyebrow">Contact &amp; free quote</span>
         <h2 id="ways-h">Tell us about your pet&rsquo;s trip</h2>
@@ -757,7 +756,7 @@
 
         <div class="note mt-3">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>
-          <p style="margin:0">
+          <p>
             <strong>Why text?</strong> We are often on the road, where a text can be answered
             safely at the next stop and a call cannot. It is also how you will receive photos
             of your pet during the trip.
@@ -766,14 +765,14 @@
       </div>
 
       <div class="form-card reveal">
-        <h3 style="font-size:clamp(1.35rem,3.4vw,1.65rem)">Request a free quote</h3>
-        <p class="small muted mt-1" style="margin-bottom:1.5rem">
+        <h3 class="form-title">Request a free quote</h3>
+        <p class="small muted mt-1 form-intro">
           Fill this in and send it straight to Kristi and Rod. Fields marked <span class="req">*</span> are required.
         </p>
 
         <form id="quote-form" name="quote-form" method="POST" data-netlify="true" netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="quote-form">
-          <p style="position:absolute;left:-9999px" aria-hidden="true">
+          <p class="honeypot" aria-hidden="true">
             <label>Don&rsquo;t fill this out if you&rsquo;re human: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
           </p>
           <div class="field-row">
@@ -783,7 +782,10 @@
             </div>
             <div class="field">
               <label for="f-phone">Your phone <span class="req" aria-hidden="true">*</span></label>
-              <input type="tel" id="f-phone" name="phone" autocomplete="tel" inputmode="tel" required>
+              <input type="tel" id="f-phone" name="phone" autocomplete="tel" inputmode="tel"
+                pattern="[0-9()+.\s-]{7,}" maxlength="25"
+                title="Enter a phone number using numbers and optional spaces, parentheses, periods, or hyphens."
+                required>
             </div>
     </div>
 
@@ -842,7 +844,7 @@
 <section class="section cta-band" aria-labelledby="cta-h">
   <div class="shell shell--narrow text-center">
     <h2 id="cta-h">Tell us where your pet needs to go</h2>
-    <p class="lede mt-1" style="color:rgba(255,255,255,.9)">
+    <p class="lede mt-1">
       Send us the two cities and your timing. You will get a real answer from Rod or Kristi
       &mdash; usually within minutes, whatever time it is.
     </p>
@@ -894,7 +896,7 @@
       <div class="footer-col footer-contact">
         <h2 id="f-contact">Contact</h2>
         <a class="big" href="sms:+12057535659">(205)&nbsp;753-5659</a>
-        <ul style="margin-top:.6rem">
+        <ul>
           <li>Texting is the fastest way to reach us.</li>
           <li>Open 24 hours a day, 7 days a week.</li>
           <li>Based in Alabama &middot; serving all 50 states.</li>

@@ -4,6 +4,49 @@
 (function () {
   "use strict";
 
+  var root = document.documentElement;
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ------------------------------------------------------------ reveals
+     Done first, and in one synchronous block, so the page never paints
+     with elements in their pre-reveal (offset) position.
+
+     `.js` on <html> is what arms the reveal styles in the stylesheet; it
+     is added here rather than inline in each page's <head> so no markup
+     carries script of its own. Anything already on screen is marked as
+     revealed in the same tick, which means no layout shift on load. */
+  root.classList.add("js");
+
+  var reveals = [].slice.call(document.querySelectorAll(".reveal"));
+
+  if (!reveals.length) {
+    /* nothing to do */
+  } else if (!("IntersectionObserver" in window) || reduce) {
+    reveals.forEach(function (el) { el.classList.add("is-in"); });
+  } else {
+    var pending = [];
+
+    reveals.forEach(function (el) {
+      // Already visible: reveal it now, before the first paint.
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add("is-in");
+      else pending.push(el);
+    });
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-in");
+        io.unobserve(entry.target);
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.06 });
+
+    pending.forEach(function (el, i) {
+      // Stagger neighbours slightly; the stylesheet owns the transition.
+      el.style.setProperty("--reveal-delay", Math.min(i % 4, 3) * 60 + "ms");
+      io.observe(el);
+    });
+  }
+
   /* ---------------------------------------------------------------- nav */
   var header = document.querySelector(".site-header");
   var toggle = document.querySelector(".nav-toggle");
@@ -51,25 +94,15 @@
     window.addEventListener("scroll", onScroll, { passive: true });
   }
 
-  /* ------------------------------------------------------------ reveals */
-  var reveals = document.querySelectorAll(".reveal");
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /* --------------------------------------------------------- phone input */
+  var phoneInput = document.getElementById("f-phone");
 
-  if (reveals.length && "IntersectionObserver" in window && !reduce) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("is-in");
-        io.unobserve(entry.target);
-      });
-    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.06 });
-
-    reveals.forEach(function (el, i) {
-      el.style.transitionDelay = Math.min(i % 4, 3) * 60 + "ms";
-      io.observe(el);
+  if (phoneInput) {
+    phoneInput.addEventListener("input", function () {
+      // Keep common phone-number formatting, but never allow letters through.
+      var cleaned = phoneInput.value.replace(/[^0-9+().\s-]/g, "");
+      if (cleaned !== phoneInput.value) phoneInput.value = cleaned;
     });
-  } else {
-    reveals.forEach(function (el) { el.classList.add("is-in"); });
   }
 
   /* ------------------------------------------------------- section spy
