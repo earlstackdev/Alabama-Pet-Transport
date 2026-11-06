@@ -38,8 +38,7 @@ cPanel). Point `alabamapettransport.com` at it and serve over HTTPS.
 
 The `#contact` quote form is a standard **Netlify Form**. It posts directly to Netlify
 (`data-netlify="true"`, `name="quote-form"`, plus the matching hidden `form-name`
-input) — no JavaScript, backend, or third-party form service is involved. A hidden
-`bot-field` honeypot input provides basic spam filtering.
+input) — no JavaScript, backend, or third-party form service is involved.
 
 Submissions land in the site's Netlify dashboard under **Forms**. To get emailed when a
 lead comes in, go to **Site settings → Forms → Form notifications** in Netlify and add

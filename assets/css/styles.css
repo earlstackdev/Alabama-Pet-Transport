@@ -190,9 +190,6 @@ p { text-wrap: pretty; }
   border: 0;
 }
 
-/* Off-screen honeypot field (spam trap) */
-.honeypot { position: absolute; left: -9999px; }
-
 /* --------------------------------------------------------------- 5 Buttons */
 .btn {
   display: inline-flex;
